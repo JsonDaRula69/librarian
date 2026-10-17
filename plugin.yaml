@@ -1,0 +1,13 @@
+name: librarian
+version: 0.1.0
+description: "Librarian — reasoning-driven documentation acquisition & ingestion agent. Delivers a standalone Hermes profile (launch/ingest/verify + runtime) plus the caller skill, so a calling agent that meets an unfamiliar dependency can delegate complete first-party documentation acquisition before it acts. Portable package: this plugin provisions the profile and host tools, and ships the documentation-librarian caller skill."
+author: "Teja + Liv"
+license: MIT
+kind: standalone
+homepage: https://github.com/JsonDaRula69/librarian
+requires_env: []
+provides_tools: []
+provides_hooks: []
+# The librarian runtime is a profile-spawned agent (hermes --profile librarian chat),
+# not an in-process tool. Provisioning (placing tools/, provisioning the profile) is
+# done by provision.py, driven through the post-install hook below.
