@@ -10,14 +10,25 @@ import time
 from pathlib import Path
 from urllib.request import urlopen
 
-ROOT = Path("/home/jsondarula/Liv-Home")
+
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
+ROOT = _hermes_home().parent / "Liv-Home"
 CORPUS = ROOT / "Doc Corpus"
 REQUEST = CORPUS / "rehearsal/ripgrep-normal-rehearsal-phase4-20260908T002500Z/request.json"
 MANIFEST = ROOT / "backup-notes/dev-readme-acceptance-manifest.json"
 ARCHIVE = CORPUS / "reports/runs/acquire-only-real-20260908T002500Z/sources/ripgrep/14.1.0/ripgrep-14.1.0.tar.gz"
 LAUNCHER = ROOT / "tools/librarian-launch.py"
-PYTHON = Path("/home/jsondarula/.hermes/hermes-agent/venv/bin/python")
-HERMES = Path(os.environ.get("HERMES_BIN", "/home/jsondarula/.hermes/hermes-agent/venv/bin/hermes"))
+PYTHON = _hermes_home() / "hermes-agent" / "venv" / "bin" / "python"
+HERMES = Path(os.environ.get("HERMES_BIN", str(_hermes_home() / "hermes-agent" / "venv" / "bin" / "hermes")))
 RUN_ID = "connected-rehearsal-ripgrep-phase4"
 EVIDENCE = CORPUS / "reports/runs" / RUN_ID
 

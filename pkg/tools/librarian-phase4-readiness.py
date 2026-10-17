@@ -4,11 +4,23 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path("/home/jsondarula/Liv-Home")
+
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
+ROOT = _hermes_home().parent / "Liv-Home"
 CORPUS = ROOT / "Doc Corpus"
 ACQUISITION = CORPUS / "reports/runs/acquire-router-fix-20260908T010000Z"
 NATIVE = CORPUS / "reports/runs/phase4-connected-normal-20260919/native-goal-receipt.json"
@@ -16,7 +28,7 @@ DEV = CORPUS / "reports/runs/phase4-connected-output-20260919/dev-stage-receipt.
 INTERRUPTION = ROOT / "backup-notes/dev-interruption-evidence-20260919-final.json"
 REQUEST = CORPUS / "rehearsal/ripgrep-normal-rehearsal-phase4-20260908T002500Z/request.json"
 OUTPUT = CORPUS / "reports/runs/phase4-readiness-20260919/connected-readiness.json"
-PYTHON = Path("/home/jsondarula/.hermes/hermes-agent/venv/bin/python")
+PYTHON = _hermes_home() / "hermes-agent" / "venv" / "bin" / "python"
 
 
 def read(path: Path) -> dict:
@@ -49,7 +61,7 @@ def main() -> int:
     prepared = read(ACQUISITION / "prepare-final.stdout")
     receipt = next(iter(dev.get("helper", {}).get("receipts", {}).values()), {})
     facts_only = set(request) == {"schema_version", "products"}
-    hermes = Path("/home/jsondarula/.hermes/hermes-agent/venv/bin/hermes")
+    hermes = Path(os.environ.get("HERMES_BIN", str(_hermes_home() / "hermes-agent" / "venv" / "bin" / "hermes")))
     model = subprocess.check_output(
         [str(hermes), "--profile", "librarian", "config", "get", "model.default"],
         cwd=ROOT, text=True, timeout=30).strip()

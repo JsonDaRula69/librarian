@@ -23,7 +23,14 @@ import sys
 
 
 def get_base_hermes_home() -> Path:
-    configured = Path(os.environ.get('HERMES_HOME', '/home/jsondarula/.hermes')).resolve()
+    configured_env = os.environ.get('HERMES_HOME')
+    if configured_env:
+        configured = Path(configured_env).resolve()
+    else:
+        try:
+            configured = (Path.home() / ".hermes").resolve()
+        except (RuntimeError, OSError):
+            configured = Path(".hermes")
     parts = configured.parts
     if len(parts) >= 2 and parts[-2] == 'profiles':
         return configured.parent.parent
@@ -536,9 +543,9 @@ def run_trusted_launch(*, request, run_dir, contract, controller, discovery,
         (run_dir / 'launch.json').write_text(json.dumps(record, indent=2) + '\n')
     return verdict
 
-DEFAULT_WORKSPACE = Path('/home/jsondarula/Liv-Home')
 ALLOWED_SECRET_NAMES = {'LITELLM_API_KEY'}
 BASE_HERMES_HOME = get_base_hermes_home()
+DEFAULT_WORKSPACE = BASE_HERMES_HOME.parent / 'Liv-Home'
 LIBRARIAN_PROFILE_ROOT = BASE_HERMES_HOME / 'profiles' / 'librarian'
 LIBRARIAN_PROTOCOL = LIBRARIAN_PROFILE_ROOT / 'OPERATING_PROTOCOL.md'
 NESTED_LAUNCH_EXIT_CODE = 73
@@ -561,7 +568,7 @@ def read_named_secret(path: Path, name: str) -> str:
     # No plaintext copy remains in the file: resolve through this profile's read-only
     # Infisical identity before failing.
     try:
-        resolved = subprocess.run(['/home/jsondarula/.hermes/bin/liv-secret', name],
+        resolved = subprocess.run([str(BASE_HERMES_HOME / 'bin' / 'liv-secret'), name],
                                   capture_output=True, text=True, timeout=15)
         if resolved.returncode == 0 and resolved.stdout.strip():
             return resolved.stdout.strip()
@@ -1285,7 +1292,7 @@ def run_executor(cmd, cwd: Path, env: dict[str, str], output, timeout: float | N
             signal.signal(signum, handler)
 
 
-NATIVE_GOAL_EXECUTABLE = '/home/jsondarula/.hermes/hermes-agent/venv/bin/hermes'
+NATIVE_GOAL_EXECUTABLE = str(BASE_HERMES_HOME / 'hermes-agent' / 'venv' / 'bin' / 'hermes')
 ANSI_ESCAPE = re.compile(rb'\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07]*(?:\x07|\x1b\\))')
 
 

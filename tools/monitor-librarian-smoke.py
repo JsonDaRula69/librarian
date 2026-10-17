@@ -3,12 +3,24 @@
 from __future__ import annotations
 
 import json
+import os
 import time
 import urllib.request
 from pathlib import Path
 import sys
 
-ROOT = Path('/home/jsondarula/Liv-Home')
+
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
+ROOT = _hermes_home().parent / 'Liv-Home'
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -21,7 +33,7 @@ OPERATION_ID = 'f11430ca-e2db-4915-a1e0-f400a60d8448'
 RUN = ROOT / 'Doc Corpus/reports/runs/librarian-ingest-smoke-20260827'
 RESULT = RUN / 'result.json'
 LEDGER = ROOT / 'Doc Corpus/dedupe/librarian-smoke-ledger.json'
-ENV = Path('/home/jsondarula/.hermes/.env')
+ENV = _hermes_home() / '.env'
 TERMINAL = {'completed', 'failed', 'cancelled', 'not_found'}
 
 
@@ -34,7 +46,7 @@ def key() -> str:
     # The plaintext copy now lives in Infisical; resolve it through this profile's
     # read-only identity before failing.
     import subprocess
-    resolved = subprocess.run(['/home/jsondarula/.hermes/bin/liv-secret', 'HINDSIGHT_API_KEY'],
+    resolved = subprocess.run([str(_hermes_home() / 'bin' / 'liv-secret'), 'HINDSIGHT_API_KEY'],
                               capture_output=True, text=True, timeout=15)
     if resolved.returncode == 0 and resolved.stdout.strip():
         return resolved.stdout.strip()

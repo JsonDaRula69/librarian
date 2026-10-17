@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import shutil
 import sys
 import time
@@ -28,11 +29,21 @@ from broker.hindsight_inventory import HindsightInventoryReader
 from broker.transport import HindsightHTTPTransport
 from broker.tag_scheme import summarize_tag_sets
 
-DEFAULT_WORKSPACE = Path("/home/jsondarula/Liv-Home")
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
+DEFAULT_WORKSPACE = _hermes_home().parent / "Liv-Home"
 DEFAULT_CORPUS = DEFAULT_WORKSPACE / "Doc Corpus"
 DEFAULT_BANK = "Liv"
 DEFAULT_CALLER = "default"
-HERMES_ENV = Path("/home/jsondarula/.hermes/.env")
+HERMES_ENV = _hermes_home() / ".env"
 DEV_CORPUS = DEFAULT_WORKSPACE / "Doc Corpus" / "dev-hindsight"
 DEV_ENV = DEFAULT_WORKSPACE / ".hermes" / "dev-hindsight.env"
 DEV_ENDPOINT = "http://127.0.0.1:18888"
@@ -369,7 +380,7 @@ def _secret(path: Path = HERMES_ENV) -> str:
     if path == HERMES_ENV:
         try:
             import subprocess
-            resolved = subprocess.run(["/home/jsondarula/.hermes/bin/liv-secret", "HINDSIGHT_API_KEY"],
+            resolved = subprocess.run([str(_hermes_home() / "bin" / "liv-secret"), "HINDSIGHT_API_KEY"],
                                       capture_output=True, text=True, timeout=15)
             if resolved.returncode == 0 and resolved.stdout.strip():
                 return resolved.stdout.strip()

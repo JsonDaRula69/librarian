@@ -9,12 +9,24 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlsplit
 
-WORKSPACE = Path("/home/jsondarula/Liv-Home")
+
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
+WORKSPACE = _hermes_home().parent / "Liv-Home"
 DEFAULT_CORPUS = WORKSPACE / "Doc Corpus"
 DEFAULT_RUN = DEFAULT_CORPUS / "reports/runs/acquire-router-fix-20260908T010000Z"
 MAX_COMPONENTS = 256

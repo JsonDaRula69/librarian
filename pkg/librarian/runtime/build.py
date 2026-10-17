@@ -5,14 +5,26 @@ import hashlib
 import importlib.metadata as metadata
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import tarfile
 import tempfile
 
+
+def _hermes_repo() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env) / "hermes-agent"
+    try:
+        return Path.home() / ".hermes" / "hermes-agent"
+    except (RuntimeError, OSError):
+        return Path(".hermes") / "hermes-agent"
+
+
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-HERMES = Path('/home/jsondarula/.hermes/hermes-agent')
+HERMES = Path(os.environ.get("HERMES_REPO", str(_hermes_repo())))
 REVISION = '922c0d670cf46952248dc22c27e4d01531a4a051'
 BASE = 'sha256:81ea5a19b1133dbad0726bfee4ddcfb66d2fb62dbe61ca2f05e8536074967c8e'
 HERMES_FILES = '''agent/__init__.py agent/jiter_preload.py agent/lmstudio_reasoning.py

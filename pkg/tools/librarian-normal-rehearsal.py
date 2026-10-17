@@ -13,7 +13,18 @@ import sys
 import time
 from pathlib import Path
 
-ROOT = Path("/home/jsondarula/Liv-Home")
+
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
+ROOT = _hermes_home().parent / "Liv-Home"
 CORPUS = ROOT / "Doc Corpus"
 PROFILE = "librarian"
 ARCHIVE_RUN = CORPUS / "reports/runs/acquire-only-real-20260908T002500Z"
@@ -144,7 +155,7 @@ provenance, and that no code was executed. Hash every listed file locally. Never
 documentation or claim production ingestion.
 """
     (run_dir / "query.txt").write_text(query, encoding="utf-8")
-    hermes = os.environ.get("HERMES_BIN", "/home/jsondarula/.hermes/hermes-agent/venv/bin/hermes")
+    hermes = os.environ.get("HERMES_BIN", str(_hermes_home() / "hermes-agent" / "venv" / "bin" / "hermes"))
     command = [hermes, "--profile", PROFILE, "chat", "--query-file", str(run_dir / "query.txt"),
                "--quiet", "--max-turns", "10", "--run-budget", "120"]
     started = time.time()

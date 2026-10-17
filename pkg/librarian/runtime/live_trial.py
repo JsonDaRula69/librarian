@@ -132,9 +132,19 @@ def _launcher():
     return module
 
 
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
 def _secret(name: str) -> str:
-    """Read only the named secret from the host's exact Hermes env file."""
-    path = Path("/home/jsondarula/.hermes/.env")
+    """Read only the named secret from the host's Hermes env file."""
+    path = _hermes_home() / ".env"
     if not path.is_file():
         raise RuntimeError("credential source unavailable")
     for line in path.read_text(encoding="utf-8-sig").splitlines():
@@ -147,7 +157,7 @@ def _secret(name: str) -> str:
     # The plaintext copy has moved into Infisical; resolve it through this profile's
     # read-only identity rather than failing.
     import subprocess
-    resolved = subprocess.run(["/home/jsondarula/.hermes/bin/liv-secret", name],
+    resolved = subprocess.run([str(_hermes_home() / "bin" / "liv-secret"), name],
                               capture_output=True, text=True, timeout=15)
     if resolved.returncode == 0 and resolved.stdout.strip():
         return resolved.stdout.strip()

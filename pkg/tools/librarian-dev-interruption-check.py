@@ -19,9 +19,20 @@ import time
 from contextlib import contextmanager
 from pathlib import Path
 
+
+def _hermes_home() -> Path:
+    env = os.environ.get("HERMES_HOME")
+    if env:
+        return Path(env)
+    try:
+        return Path.home() / ".hermes"
+    except (RuntimeError, OSError):
+        return Path(".hermes")
+
+
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "backup-notes/dev-readme-acceptance-manifest.json"
-PYTHON = "/home/jsondarula/.hermes/hermes-agent/venv/bin/python"
+PYTHON = str(_hermes_home() / "hermes-agent" / "venv" / "bin" / "python")
 
 
 def load_e2e():
