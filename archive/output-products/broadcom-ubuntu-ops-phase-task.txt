@@ -1,0 +1,26 @@
+Run ID: broadcom-ubuntu-ops-20260906
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+
+Purpose: acquire and prepare the bounded first-party Canonical/Ubuntu operational documentation needed to update an Ubuntu 24.04 kernel safely when an out-of-tree DKMS Wi-Fi module may fail. Do not submit to Hindsight in this phase.
+
+Authoritative boundary:
+1. Canonical Ubuntu documentation pages directly covering DKMS/external modules and kernel-package updates.
+2. Canonical Ubuntu Secure Boot documentation directly covering DKMS/module signing, MOK enrollment, and unsigned third-party modules.
+3. Canonical Ubuntu documentation directly covering GRUB selection of an older installed kernel, retaining/removing kernels, package holds/unholds, and recovery when the new kernel cannot provide networking.
+4. Include the first-party page's directly linked child pages only when they are within one of those exact topics. Exclude general Ubuntu installation, unrelated boot repair, unrelated drivers, and community answers/forums unless a Canonical page explicitly designates one as its procedure.
+5. Check `llms.txt` and `llms-full.txt` on each used Canonical/Ubuntu documentation domain; preserve the checks and classify them accurately. If no valid index exists, use the selected first-party landing/navigation pages as the declared bounded enumerator and record the URL/topic predicate.
+
+Requirements:
+- Store exact source bytes under `sources/first-party/broadcom-wl-ubuntu-noble/ubuntu-operations/`.
+- Prepare non-empty UTF-8 Markdown under `prepared/broadcom-wl-ubuntu-noble/ubuntu-operations/` without overwriting source bytes.
+- Write acquisition/index/prepared manifests and result evidence under `reports/runs/broadcom-ubuntu-ops-20260906/`.
+- Record each enumerated URL occurrence, final URL, HTTP status, content type, bytes, SHA-256, title/topic, selection predicate, recovery method, and explicit unavailable outcomes. Require occurrence-to-manifest parity.
+- Write launcher-required `result.json` plus `summary.md` with exact enumerated/source/prepared/unavailable/excluded counts and parity assertion.
+
+Safety: acquisition/preparation only. No Hindsight POST. Do not install/update/hold/unhold packages, build DKMS, touch modules, change networking/GRUB/Secure Boot/services, or reboot. Do not launch/delegate another agent. Do not inspect or manage launcher/broker/PIDs and do not use process/ps/kill.
+
+Stop successfully when every URL in the bounded selected navigation/topic boundary is downloaded or concretely unavailable, prepared, and manifest-parity verified. Stop blocked only for a concrete source/integrity failure.

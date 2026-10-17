@@ -1,0 +1,227 @@
+{
+  "schema": 1,
+  "created_utc": "2026-08-27T08:47:01Z",
+  "source_root": "/home/jsondarula",
+  "destination_root": "/home/jsondarula/Liv-Home/ingestion-scripts",
+  "script_count": 33,
+  "categories": {
+    "acquisition": [
+      "acquire_fast.py",
+      "acquire_google_corpus.py",
+      "crawl_gemini.py",
+      "full_docs_backfill.py",
+      "glances_acquire.py"
+    ],
+    "preparation": [
+      "append_gemini_sitemap.py",
+      "build_icloud_corpus.py",
+      "build_openai_corpus.py",
+      "build_target_backfill.py",
+      "prepare_openai_corpus.py"
+    ],
+    "ingestion": [
+      "glances_ingest.py",
+      "glances_liv_ingest.py",
+      "ingest_google_corpus.py",
+      "ingest_icloud_corpus.py",
+      "retain_full_docs.py",
+      "retain_openai_corpus.py",
+      "retain_retry_openai.py",
+      "retain_target_backfill.py",
+      "submit_voyageai.py",
+      "voyageai_ingest.py"
+    ],
+    "polling": [
+      "poll_full_docs.py",
+      "poll_icloud_corpus.py",
+      "poll_openai_corpus.py",
+      "poll_target_backfill.py"
+    ],
+    "repair": [
+      "correct_openai_index_definition.py",
+      "repair_unavailable_openai.py"
+    ],
+    "finalization": [
+      "final_lock_openai.py",
+      "finalize_full_docs.py",
+      "finalize_google_corpus.py",
+      "finalize_openai_corpus.py",
+      "finalize_target_backfill.py"
+    ],
+    "sealing": [
+      "seal_icloud_corpus.py"
+    ],
+    "diagnostics": [
+      "preflight_hindsight.py"
+    ]
+  },
+  "moves": [
+    {
+      "from": "/home/jsondarula/acquire_fast.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/acquisition/acquire_fast.py",
+      "category": "acquisition"
+    },
+    {
+      "from": "/home/jsondarula/acquire_google_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/acquisition/acquire_google_corpus.py",
+      "category": "acquisition"
+    },
+    {
+      "from": "/home/jsondarula/crawl_gemini.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/acquisition/crawl_gemini.py",
+      "category": "acquisition"
+    },
+    {
+      "from": "/home/jsondarula/full_docs_backfill.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/acquisition/full_docs_backfill.py",
+      "category": "acquisition"
+    },
+    {
+      "from": "/home/jsondarula/glances_acquire.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/acquisition/glances_acquire.py",
+      "category": "acquisition"
+    },
+    {
+      "from": "/home/jsondarula/append_gemini_sitemap.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/preparation/append_gemini_sitemap.py",
+      "category": "preparation"
+    },
+    {
+      "from": "/home/jsondarula/build_icloud_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/preparation/build_icloud_corpus.py",
+      "category": "preparation"
+    },
+    {
+      "from": "/home/jsondarula/build_openai_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/preparation/build_openai_corpus.py",
+      "category": "preparation"
+    },
+    {
+      "from": "/home/jsondarula/build_target_backfill.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/preparation/build_target_backfill.py",
+      "category": "preparation"
+    },
+    {
+      "from": "/home/jsondarula/prepare_openai_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/preparation/prepare_openai_corpus.py",
+      "category": "preparation"
+    },
+    {
+      "from": "/home/jsondarula/glances_ingest.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/glances_ingest.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/glances_liv_ingest.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/glances_liv_ingest.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/ingest_google_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/ingest_google_corpus.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/ingest_icloud_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/ingest_icloud_corpus.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/retain_full_docs.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/retain_full_docs.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/retain_openai_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/retain_openai_corpus.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/retain_retry_openai.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/retain_retry_openai.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/retain_target_backfill.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/retain_target_backfill.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/submit_voyageai.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/submit_voyageai.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/voyageai_ingest.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/ingestion/voyageai_ingest.py",
+      "category": "ingestion"
+    },
+    {
+      "from": "/home/jsondarula/poll_full_docs.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/polling/poll_full_docs.py",
+      "category": "polling"
+    },
+    {
+      "from": "/home/jsondarula/poll_icloud_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/polling/poll_icloud_corpus.py",
+      "category": "polling"
+    },
+    {
+      "from": "/home/jsondarula/poll_openai_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/polling/poll_openai_corpus.py",
+      "category": "polling"
+    },
+    {
+      "from": "/home/jsondarula/poll_target_backfill.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/polling/poll_target_backfill.py",
+      "category": "polling"
+    },
+    {
+      "from": "/home/jsondarula/correct_openai_index_definition.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/repair/correct_openai_index_definition.py",
+      "category": "repair"
+    },
+    {
+      "from": "/home/jsondarula/repair_unavailable_openai.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/repair/repair_unavailable_openai.py",
+      "category": "repair"
+    },
+    {
+      "from": "/home/jsondarula/final_lock_openai.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/finalization/final_lock_openai.py",
+      "category": "finalization"
+    },
+    {
+      "from": "/home/jsondarula/finalize_full_docs.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/finalization/finalize_full_docs.py",
+      "category": "finalization"
+    },
+    {
+      "from": "/home/jsondarula/finalize_google_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/finalization/finalize_google_corpus.py",
+      "category": "finalization"
+    },
+    {
+      "from": "/home/jsondarula/finalize_openai_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/finalization/finalize_openai_corpus.py",
+      "category": "finalization"
+    },
+    {
+      "from": "/home/jsondarula/finalize_target_backfill.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/finalization/finalize_target_backfill.py",
+      "category": "finalization"
+    },
+    {
+      "from": "/home/jsondarula/seal_icloud_corpus.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/sealing/seal_icloud_corpus.py",
+      "category": "sealing"
+    },
+    {
+      "from": "/home/jsondarula/preflight_hindsight.py",
+      "to": "/home/jsondarula/Liv-Home/ingestion-scripts/diagnostics/preflight_hindsight.py",
+      "category": "diagnostics"
+    }
+  ],
+  "active_infisical_processes_checked": true,
+  "hindsight_api_calls": 0
+}

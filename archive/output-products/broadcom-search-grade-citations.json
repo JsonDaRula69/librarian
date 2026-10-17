@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": 1,
+      "url": "https://launchpad.net/ubuntu/noble/amd64/broadcom-sta-dkms",
+      "title": "Ubuntu Noble broadcom-sta-dkms publishing history",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 2,
+      "url": "https://launchpad.net/ubuntu/+source/broadcom-sta/6.30.223.271-23ubuntu1.2",
+      "title": "broadcom-sta 6.30.223.271-23ubuntu1.2 source package",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 3,
+      "url": "https://bugs.launchpad.net/ubuntu/+source/broadcom-sta/+bug/2120508",
+      "title": "SRU: Kernel 6.17 support in broadcom-sta",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 4,
+      "url": "https://launchpad.net/ubuntu/+source/broadcom-sta/6.30.223.271-23ubuntu1.3",
+      "title": "broadcom-sta 6.30.223.271-23ubuntu1.3 source package",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 5,
+      "url": "https://help.ubuntu.com/community/WifiDocs/Driver/bcm43xx",
+      "title": "Ubuntu Broadcom BCM43xx driver guide",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 6,
+      "url": "https://help.ubuntu.com/community/Grub2/Submenus",
+      "title": "Ubuntu GRUB older-kernel submenus",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 7,
+      "url": "https://documentation.ubuntu.com/security/security-features/platform-protections/secure-boot",
+      "title": "Ubuntu Secure Boot",
+      "accessed": "2026-09-06"
+    },
+    {
+      "id": 8,
+      "url": "https://docs.kernel.org/kbuild/modules.html",
+      "title": "Linux external modules",
+      "accessed": "2026-09-06"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+Run ID: broadcom-linux-kernel-docs-20260906
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+
+Purpose: acquire and prepare the commit-pinned upstream Linux kernel documentation slice needed to interpret Broadcom `wl` as an external/out-of-tree module across kernel updates. Do not submit to Hindsight in this phase.
+
+Authoritative boundary:
+- Clone or fetch the canonical kernel.org Linux Git repository using a shallow, commit-pinned checkout of the currently documented stable branch/tag appropriate to the host's 6.8 kernel where possible. Record exact commit SHA, ref, remote URL, and acquisition time.
+- Include exactly the authored documentation files governing external modules/Kbuild, module versioning/vermagic or modversions, module signing, tainted/proprietary modules, and kernel command-line/module loading only where needed to interpret module compatibility. At minimum enumerate canonical files corresponding to `Documentation/kbuild/modules.rst`, `Documentation/kbuild/kbuild.rst` where directly referenced, `Documentation/kbuild/reproducible-builds.rst` if relevant to module metadata, `Documentation/admin-guide/module-signing.rst`, `Documentation/admin-guide/tainted-kernels.rst`, and `Documentation/kbuild/makefiles.rst` sections directly required by external modules. Do not broaden into all kernel docs.
+- Check kernel.org docs `llms.txt` and `llms-full.txt` and record outcomes. These checks do not replace the commit-pinned repository enumerator.
+
+Requirements:
+- Exact source bytes under `sources/open-source/broadcom-wl-ubuntu-noble/linux-kernel/`.
+- Prepared non-empty UTF-8 Markdown under `prepared/broadcom-wl-ubuntu-noble/linux-kernel/`, preserving authored reStructuredText content in `.md` wrappers with source path/ref/commit provenance.
+- Run evidence under `reports/runs/broadcom-linux-kernel-docs-20260906/`.
+- Manifest fields: occurrence, upstream path, repository URL, ref, commit, bytes, SHA-256, inclusion reason, prepared path/hash, exclusions/unavailable.
+- Require enumerated occurrence/source/prepared parity and report exact counts.
+- Write launcher-required `result.json` and `summary.md`.
+
+Safety: acquisition/preparation only. No Hindsight POST. No kernel/package/DKMS/module/network/GRUB/Secure Boot/service/reboot changes. No binary/build/vendor/test data. Do not launch/delegate another agent. Do not inspect or manage launcher/broker/PIDs; no process/ps/kill.
+
+Stop successfully when every file in this explicitly bounded kernel-doc slice is commit-pinned, collected, prepared, and manifest-parity verified. Stop blocked only for a concrete source/integrity failure.

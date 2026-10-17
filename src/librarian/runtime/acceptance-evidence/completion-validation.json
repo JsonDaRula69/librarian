@@ -1,0 +1,16 @@
+{
+  "schema": "librarian-completion-validation-v2",
+  "valid": true,
+  "errors": [],
+  "warnings": [],
+  "computed_counts": {
+    "enumerators": 1,
+    "occurrences": 2,
+    "collected": 2,
+    "unavailable": 0,
+    "excluded": 0,
+    "prepared": 2,
+    "unique_hashes": 2
+  },
+  "status": "completed"
+}

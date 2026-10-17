@@ -1,0 +1,58 @@
+Run ID: broadcom-wl-ubuntu-noble-20260906d
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+Purpose: acquire, prepare, pre-submit deduplicate, and submit to the Liv Hindsight queue the authoritative documentation needed to safely update Ubuntu kernels on macpro-linux without breaking its Broadcom BCM4360 Wi-Fi driver. This run is complete once the correct, complete declared corpus has been sourced, evidenced, deduplicated, accepted by Hindsight with operation IDs, and all accepted operations are confirmed pending, processing, or completed. Do not wait for terminal ingestion or recall certification.
+
+Observed live target facts (treat as scope selectors, independently verify against sources):
+- Hardware: Broadcom BCM4360 [14e4:43a0], Apple subsystem [106b:0135].
+- Active driver: proprietary wl.
+- Installed source package/binary: broadcom-sta-dkms 6.30.223.271-23ubuntu1.
+- Running kernel: Ubuntu 24.04 Noble 6.8.0-111-generic.
+- Installed DKMS builds: 6.8.0-100-generic and 6.8.0-111-generic.
+- The 6.8.0-111 kernel image and headers are currently held.
+- Operational concern: kernel compatibility, DKMS build success, Secure Boot signing, retaining a bootable fallback kernel, and safe pre/post reboot verification.
+
+Declared authoritative documentation boundary:
+1. The complete Ubuntu/Canonical source-package record for Noble's `broadcom-sta` version 6.30.223.271-23ubuntu1, including package metadata, changelog, copyright/licensing metadata, Debian packaging rules, DKMS configuration, and every downstream patch shipped by Ubuntu for that exact version. Prefer the canonical Ubuntu source package/Launchpad publication and preserve a source archive or commit-pinned canonical packaging repository when available.
+2. Canonical Ubuntu documentation directly governing kernel updates, DKMS modules, Secure Boot/module signing, package holds, selecting/falling back to an older kernel in GRUB, and recovery when a third-party wireless module fails after a kernel upgrade. Include only first-party Canonical/Ubuntu sources within these operational topics, but enumerate the full first-party navigation/source boundary selected for each topic.
+3. First-party Linux kernel documentation needed to interpret external/out-of-tree module compatibility and module vermagic/signing only where Ubuntu documentation defers to it. Pin repository sources to a commit when sourced from kernel.org Git.
+4. The locally installed `/usr/share/doc/broadcom-sta-dkms/` documentation and `/usr/src/broadcom-sta-6.30.223.271/` DKMS source metadata/patch evidence, preserved as local package evidence with dpkg package/version provenance. Do not ingest generated build products, binaries, object files, cache, or secrets.
+5. Explicitly check official `llms.txt` and `llms-full.txt` locations for each applicable documentation domain. Record 404/non-index outcomes; do not misclassify aggregate prose as enumeration proof.
+
+Completeness rules:
+- Complete within the declared package-version and operational-topic boundary; do not broaden into all Ubuntu or all kernel documentation.
+- Preserve exact source bytes, final URLs, status/content type/size/SHA-256, source package version, repository commit and source path where applicable.
+- Enumerate each authoritative index/navigation/package-source occurrence and maintain manifest parity; every row must be collected or concretely unavailable.
+- For the package source, every Debian/Ubuntu packaging file and patch relevant to broadcom-sta must be represented; do not choose a few examples.
+- Exclude unrelated Ubuntu manuals, unrelated drivers/chipsets, generated binaries, vendor/dependency trees, test fixtures, build output, and secrets. Record exclusions with reasons.
+
+Corpus placement:
+- First-party online sources under `sources/first-party/broadcom-wl-ubuntu-noble/`.
+- Open-source kernel material, if needed, under `sources/open-source/broadcom-wl-ubuntu-noble/`.
+- Prepared UTF-8 Markdown under `prepared/broadcom-wl-ubuntu-noble/` without overwriting source bytes.
+- Manifests/dedupe/submission evidence under their standard corpus directories.
+- Complete run evidence under `reports/runs/broadcom-wl-ubuntu-noble-20260906d/`.
+
+Hindsight/broker requirements:
+- Use only the supplied opaque broker lease; never seek or receive the static Hindsight credential.
+- Preflight and require bank `Liv` to be visible.
+- Immediately before each POST, hash exact prepared bytes and atomically claim the caller/bank/hash in the durable ledger.
+- Skip hashes already active or completed; append provenance aliases. A path move is not new content.
+- Submit conservative batches of 1-5 files with aligned per-file metadata.
+- Persist operation IDs immediately and confirm every accepted ID is present in Hindsight as pending, processing, or completed. Do not wait for terminal states in this run.
+- Recall certification is explicitly deferred until the queued operations finish; record that defer reason rather than blocking completion.
+
+Safety:
+- Documentation and ingestion only. Do not install, upgrade, hold/unhold, rebuild, unload/reload, or modify kernel modules; do not reboot; do not alter networking, GRUB, Secure Boot, package state, Hindsight configuration, or services.
+- Do not recursively launch another Librarian or delegate.
+- The parent launcher and broker are externally supervised by Liv. Do not inspect, poll, wait on, signal, terminate, or manage any process, PID, launcher, broker, or agent session. Do not call the `process` tool. Never run `ps`, `pgrep`, `kill`, or equivalent lifecycle commands. Your only lifecycle responsibility is to finish the assigned acquisition and submission work and return normally.
+- Do not treat the launcher PID, executor PID, or background-task identifier as work to monitor. They are not Hindsight operation IDs. Track only operation IDs returned by broker `retain-file` calls.
+- Do not stop merely because the complete boundary requires multiple downloads or manifests. Continue within the six-hour lease until every declared source is accounted for and submitted, or until a concrete external source/broker failure makes further progress impossible.
+
+Required final evidence:
+Produce `reports/runs/broadcom-wl-ubuntu-noble-20260906d/final-result.json` and `summary.md` containing exact source/prepared/unique-hash/alias/skipped/submitted/accepted/pending/completed/failed/cancelled/unavailable counts, operation IDs, index validation, package-version evidence, exclusions, recall results or defer reason, and any scope ambiguity.
+
+Stop condition: stop successfully when this declared documentation boundary is completely acquired and evidenced, pre-submit deduplicated, submitted to Liv, and every accepted operation ID is verified as pending, processing, or completed; or stop blocked when a concrete blocker is recorded in the required final artifacts. Do not wait for terminal ingestion or recall. Return control to Liv for independent verification before any Ubuntu update action.

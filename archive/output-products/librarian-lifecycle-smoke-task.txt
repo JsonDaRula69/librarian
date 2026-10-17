@@ -1,0 +1,8 @@
+Run ID: librarian-lifecycle-smoke-20260906
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+
+Perform a lifecycle-only smoke test. Read the absolute Librarian SOUL path named by the launcher prompt. Confirm LIBRARIAN_EXECUTOR is set to 1. Use `/home/jsondarula/Liv-Home/tools/librarian-broker.py` exactly once for `bank-list` with the caller binding from this task and confirm HTTP 200 with Liv visible. Then deliberately invoke `librarian chat -q nested-probe` exactly once and require it to fail with exit code 73 and the text `recursive Librarian launch blocked`; this is the structural nested-launch guard test and must not start a child. Do not access the web, acquire documents, retain files, recall, or write to Hindsight. Write the required launcher result.json with fields: status, executor_env_present, soul_read, bank_list_http_status, liv_visible, nested_probe_exit_code, nested_guard_confirmed, static_hindsight_key_present, writes_performed. Status is success only when all checks pass and static_hindsight_key_present is false. Stop immediately afterward.

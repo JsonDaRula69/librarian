@@ -1,0 +1,18 @@
+[
+  {
+    "path": "/home/jsondarula/Liv-Home/Doc Corpus/reports/runs/broadcom-linux-full-corpus-eval-20260907/librarian.log",
+    "action": "lossless_compression",
+    "before": 23839,
+    "after": 6310
+  },
+  {
+    "path": "/home/jsondarula/Liv-Home/Doc Corpus/reports/runs/broadcom-linux-full-corpus-eval-v2-20260907/librarian.log",
+    "action": "lossless_compression",
+    "before": 8703,
+    "after": 3067
+  },
+  {
+    "path": "/home/jsondarula/Liv-Home/Doc Corpus/reports/runs/broadcom-linux-full-corpus-eval-v2-20260907/.executor-bin/librarian",
+    "action": "removed_stale_executor_guard"
+  }
+]

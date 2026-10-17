@@ -1,0 +1,40 @@
+Run ID: broadcom-linux-full-corpus-eval-20260907
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+Named programs: Ubuntu Broadcom STA (`broadcom-sta`, `bcmwl-kernel-source`, `wl`) and the Linux kernel documentation program.
+Task purpose: evaluate safety before updating the Linux kernel on macpro-linux with BCM4360 `[14e4:43a0]` and proprietary `wl`.
+Stop condition: complete acquisition and evidence only; do not submit to Hindsight in this evaluation run.
+
+This run tests the shared Librarian policy. The task purpose above is context for later synthesis and MUST NOT narrow acquisition. Acquire the complete authoritative first-party documentation corpora for both named programs:
+
+1. Complete Ubuntu/Canonical first-party Broadcom STA corpus across all canonical names and aliases, current supported Ubuntu/Noble versions and channels, source-package publication history, binary-package pages, changelogs, all source-package files and downstream patches for current supported/candidate versions, official support/troubleshooting pages, first-party bugs/SRUs/advisories, compatibility records, installation/configuration, upgrades, security, and recovery/rollback. Resolve installed, current updates, security, and proposed versions before freezing the boundary. Include BCM4360 and PCI ID discovery surfaces.
+2. Complete authored Linux kernel documentation corpus from the canonical repository, pinned to the current stable repository commit/ref selected and justified by Librarian. “Complete” means every authored documentation source under the repository's canonical documentation boundary—not only module/Kbuild pages relevant to `wl`. Exclude generated builds, binaries, dependency/vendor trees, test fixtures, translations generated from sources, and non-documentation source code under the protocol; record exclusions.
+
+Required evaluation behavior:
+- Follow `/home/jsondarula/.hermes/profiles/librarian/OPERATING_PROTOCOL.md` as the single operational authority.
+- Ignore any task-context implication that only kernel-update-relevant pages are wanted. No narrow task-keyword predicate is authorized.
+- Use every applicable authoritative enumerator and produce a coverage matrix. For Ubuntu Broadcom, union archive/Launchpad publication records, packages pages, first-party support docs, first-party bug/SRU tracker, and relevant official indexes/navigation. For Linux, use the complete commit-pinned repository documentation tree as enumerator.
+- Run the required independent completeness challenge across all aliases, versions/channels, hardware ID, releases, compatibility, troubleshooting, security, recovery, and rollback.
+- Preserve source bytes and prepare non-empty UTF-8 Markdown according to protocol. Use provenance aliases for exact repeats. Do not include `.pc` patch backups or redundant installed/extracted copies when canonical package sources preserve the content.
+- Compare with prior Broadcom runs only for reuse and provenance. Do not let their earlier narrow boundaries constrain this run.
+- Do not submit to Hindsight. This is a search-effectiveness evaluation; parent Liv will independently compare findings and decide whether submission follows.
+
+Required evidence under `reports/runs/broadcom-linux-full-corpus-eval-20260907/`:
+- enumerator snapshots and validation
+- acquisition manifest
+- prepared manifest
+- coverage matrix
+- aliases-and-versions.json
+- exclusions.json
+- completeness-challenge.json
+- prior-run-comparison.json
+- result.json
+- final-result.json
+- summary.md
+
+Final report exact counts: expected/enumerated occurrences, collected, unavailable, prepared, unique hashes, aliases, exclusions, and coverage-matrix gaps. List every authoritative enumerator, Ubuntu version/channel found, and Linux repository/ref/commit. Status must be blocked if any complete-corpus cell is missing or unverifiable.
+
+Safety: acquisition and preparation only. No Hindsight POST; no package, kernel, DKMS, module, network, GRUB, Secure Boot, service, container, or reboot changes. Do not launch/delegate another agent or inspect/manage launcher/broker/PIDs.

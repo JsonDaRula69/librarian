@@ -1,0 +1,12 @@
+{
+  "status": "passed",
+  "challenges": [
+    {
+      "scope": "approved-plan-parity",
+      "attempts": [
+        "docs:git-tree"
+      ],
+      "outcome": "no_new_occurrences"
+    }
+  ]
+}

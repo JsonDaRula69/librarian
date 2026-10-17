@@ -1,0 +1,22 @@
+{
+  "run_id": "e2e-offline",
+  "caller_profile": "librarian",
+  "workspace": "/tmp/librarian-e2e-55z2gc3k",
+  "corpus_root": "/tmp/librarian-e2e-55z2gc3k/corpus",
+  "hindsight_bank": "Liv",
+  "status": "completed",
+  "source_failures": [],
+  "counts": {
+    "enumerators": 1,
+    "occurrences": 2,
+    "collected": 2,
+    "unavailable": 0,
+    "excluded": 0,
+    "prepared": 2,
+    "unique_hashes": 2
+  },
+  "completion_errors": [],
+  "submission": {
+    "accepted": 2
+  }
+}

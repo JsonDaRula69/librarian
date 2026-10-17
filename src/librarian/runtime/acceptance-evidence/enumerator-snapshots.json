@@ -1,0 +1,12 @@
+{
+  "enumerators": [
+    {
+      "id": "docs",
+      "status": "complete",
+      "occurrence_ids": [
+        "docs:Documentation/index.md",
+        "docs:Documentation/schema.json"
+      ]
+    }
+  ]
+}

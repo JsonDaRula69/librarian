@@ -1,0 +1,8 @@
+{
+  "schema": 3,
+  "run_id": "e2e-offline",
+  "exit_code": 0,
+  "executor_exit_code": 0,
+  "completion_gate_valid": true,
+  "completion_gate_errors": []
+}

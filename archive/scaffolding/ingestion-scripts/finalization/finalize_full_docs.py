@@ -1,0 +1,16 @@
+import json
+from pathlib import Path
+ROOT=Path('/tmp/full-docs-backfill')
+for product in ('hindsight','ollama'):
+ root=ROOT/product; src=json.loads((root/'source-manifest.json').read_text()); rdir=sorted((root/'runs').iterdir())[-1]; sub=json.loads((rdir/'liv-submissions.json').read_text()); ops=json.loads((rdir/'liv-operations.json').read_text())
+ status={}
+ for x in src['sources']: status[x['status']]=status.get(x['status'],0)+1
+ unavailable=[{'url':x['listed_url'],'final_status':x['final_status'],'recovery_attempted':x['recovery_attempted'],'recovery_url':x.get('recovery_url'),'recovery_status':x.get('recovery_status')} for x in src['sources'] if x['status']=='unavailable']
+ compliant=(len(unavailable)==0 and ops['final']['all_succeeded'])
+ audit={'schema':'full-docs-backfill-final-audit-v1','product':product,'classification':'compliant' if compliant else ('in-progress' if not ops['final']['all_terminal'] else 'not-fully-compliant'),'index_checks':[{'url':x['url'],'status':x['status'],'valid_document_index':x['valid_document_index'],'enumerated_url_count':x['enumerated_url_count']} for x in src['index_checks']],'index_parity':src['index_parity'],'collection_status_counts':status,'unavailable_sources':unavailable,'retention':{'bank':'Liv','run_id':sub['run_id'],'selected':sub['selected_count'],'accepted_operations':len(sub['accepted_operation_ids']),'operations_final':ops['final'],'bounded_poll_rounds':len(ops['poll_rounds']),'targeted_tag_scoped_recall':'skipped: submitted operations remained nonterminal'},'coverage_statement':src['coverage_statement'],'full_compliance':compliant,'reason':('All index sources collected and all retention operations completed.' if compliant else ('Collection incomplete due to explicit unavailable index URLs; retention operations also remain pending.' if unavailable and not ops['final']['all_terminal'] else ('Collection incomplete due to explicit unavailable index URLs.' if unavailable else 'All sources collected, but retention remains nonterminal.'))),'artifact_paths':{'source_manifest':str(root/'source-manifest.json'),'coverage':str(root/'COVERAGE.md'),'submission':str(rdir/'liv-submissions.json'),'operations':str(rdir/'liv-operations.json')}}
+ (root/'final-audit.json').write_text(json.dumps(audit,indent=2)+'\n')
+ lines=[f'# {product} full-docs backfill audit','',f"Classification: **{audit['classification']}**",'',audit['coverage_statement'],'',f"Retention: {audit['retention']['accepted_operations']} accepted operations; final states {audit['retention']['operations_final']['counts']}. Tag-scoped recall: {audit['retention']['targeted_tag_scoped_recall']}",'',f"Full compliance: **{audit['full_compliance']}** — {audit['reason']}",'','## Artifact paths']+[f'- {k}: `{v}`' for k,v in audit['artifact_paths'].items()]
+ if unavailable:
+  lines+=['','## Unavailable indexed sources']+[f"- {x['url']} — HTTP {x['final_status']}" for x in unavailable]
+ (root/'final-audit.md').write_text('\n'.join(lines)+'\n')
+ print(product, json.dumps({'collection':status,'accepted':audit['retention']['accepted_operations'],'ops':ops['final']['counts'],'recall':audit['retention']['targeted_tag_scoped_recall'],'classification':audit['classification']}))

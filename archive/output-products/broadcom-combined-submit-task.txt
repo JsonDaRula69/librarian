@@ -1,0 +1,45 @@
+Run ID: broadcom-combined-submit-20260906
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+
+Purpose: independently verify the three completed Broadcom/Ubuntu acquisition phases, build a deduplicated combined submission set, and submit every unique prepared document to the Liv Hindsight queue. Completion is queue acceptance; do not wait for terminal ingestion or recall.
+
+Input phases and required evidence:
+1. `reports/runs/broadcom-package-source-20260906/` — exact Ubuntu broadcom-sta package source/local evidence. Require result status completed, source package 6.30.223.271-23ubuntu1, three source artifacts, verified archive SHA-256, 28 patches, 227 prepared files, and manifest parity.
+2. `reports/runs/broadcom-ubuntu-ops-20260906/` — bounded Canonical/Ubuntu operational docs. Require status completed, 4 enumerated/collected/prepared, 0 unavailable, and occurrence parity.
+3. `reports/runs/broadcom-linux-kernel-docs-20260906/` — kernel.org docs. Require status success, 6 source/prepared, 0 unavailable, parity, repository `https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git`, ref `v6.8.9`, commit `f3d61438b613b87afb63118bea6fb18c50ba7a6b`.
+
+Before submission:
+- Read every acquisition/prepared manifest and recompute file existence, non-empty UTF-8 decoding, `.md` suffix, byte size, and SHA-256. Do not trust phase summaries alone.
+- Build `reports/runs/broadcom-combined-submit-20260906/combined-prepared-manifest.json` containing one row per prepared input with phase, workspace-relative path, bytes, SHA-256, provenance/source links, and dedupe decision.
+- Exact-byte deduplicate across all 237 prepared inputs (227+4+6). Preserve aliases for byte-identical duplicates. Never semantic-deduplicate byte-different files.
+- Use a durable ledger under `dedupe/broadcom-wl-ubuntu-noble-ledger.jsonl`, keyed by caller namespace + Liv + prepared SHA-256. Atomically claim immediately before each POST. Respect existing active/completed claims if present; a moved path is not new.
+- Package-source prepared output includes many source-code/header files. Keep every phase-approved prepared file because this final run verifies the already-declared phase boundary; do not broaden or silently prune it.
+
+Hindsight broker submission:
+- Use only the supplied broker lease and `/home/jsondarula/Liv-Home/tools/librarian-broker.py`; never read the static Hindsight credential.
+- Preflight bank list and require Liv visible.
+- Submit unique, newly claimed `.md` files one at a time (the broker helper currently accepts one file per invocation), using concise context and tags: `broadcom-wl-ubuntu-noble`, the phase name, source package/ref, and run ID.
+- Persist each accepted operation ID immediately to `submission-audit.jsonl` before submitting the next file.
+- If a POST disposition is uncertain, reconcile ledger/audit and operation status before retry; never guess.
+- After all files, query each accepted operation ID through broker `operation-status` and require HTTP 200 with status in `pending`, `processing`, or `completed`. Do not wait for status changes.
+- Submission parity: unique new claims requiring POST must equal accepted operation IDs; skipped active/completed hashes must have alias evidence.
+
+Required output under `reports/runs/broadcom-combined-submit-20260906/`:
+- phase-verification.json
+- combined-prepared-manifest.json
+- dedupe-decisions.json
+- submission-audit.jsonl
+- operation-status.json
+- result.json (the launcher-required path)
+- final-result.json
+- summary.md
+
+Final exact counts: input prepared, unique hashes, aliases, skipped, submitted, accepted, pending, processing, completed, failed, cancelled, unavailable. List all operation IDs. Recall status must be `deferred` with reason `queue acceptance is this run's stop condition`.
+
+Safety: do not wait for ingestion completion; do not recall; do not change Hindsight configuration/data except the authorized retains; do not install/update packages, build DKMS, touch modules/networking/GRUB/Secure Boot/services, or reboot. Do not launch/delegate another agent. Do not inspect/manage launcher/broker/PIDs; no process/ps/kill.
+
+Stop successfully once phase parity and combined dedupe parity pass and every unique newly claimed document is accepted into Liv with a live status of pending/processing/completed. Stop blocked on any phase mismatch, hash mismatch, UTF-8/empty file, broker failure, rejected submission, uncertain disposition, or operation lookup failure, preserving exact safe evidence.

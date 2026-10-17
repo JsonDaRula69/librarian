@@ -1,0 +1,33 @@
+Run ID: openai-gpt6-astra-models-20260906
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+
+Purpose: acquire, prepare, pre-submit deduplicate, and submit to the Liv Hindsight queue all current first-party OpenAI documentation required to configure GPT-6 Astra and every officially documented/currently accessible GPT-6 Astra variant, plus any other OpenAI model newly released since the existing local OpenAI documentation snapshot. Completion is queue acceptance; do not wait for terminal ingestion or recall.
+
+Authoritative boundary:
+1. OpenAI Developers documentation model catalog and every first-party model page for GPT-6 Astra and its variants.
+2. OpenAI Codex/ChatGPT documentation describing GPT-6 Astra availability, variant names, capabilities, limits, context/output sizes, reasoning controls, supported endpoints/transports, subscription/API access, migrations/deprecations, and model selection.
+3. OpenAI first-party release notes/changelog/model-release pages that enumerate other models newly released since August 29, 2026. Include only model/runtime information needed to identify and configure them accurately; do not ingest unrelated OpenAI docs.
+4. Official machine-readable indexes are the enumerators: check and preserve `https://developers.openai.com/llms.txt`, relevant first-party `llms-full.txt`, and current Codex/ChatGPT documentation indexes. Use every listed occurrence within the declared model/release predicate and maintain parity. Append `.md` only where the official OpenAI docs expose it as the canonical machine-readable page.
+5. Independently query the authenticated local OpenAI/Codex-access model catalog through supported read-only mechanisms available to the Librarian profile only if it can do so without reading static caller credentials. Record accessible IDs as runtime evidence, but do not treat runtime enumeration alone as first-party documentation.
+
+Requirements:
+- Sources under `sources/first-party/openai-gpt6-astra-models/`.
+- Prepared UTF-8 Markdown under `prepared/openai-gpt6-astra-models/`.
+- Evidence under `reports/runs/openai-gpt6-astra-models-20260906/`.
+- Record exact official model IDs verbatim; never infer or normalize a model slug.
+- Distinguish documented availability from runtime-access verification.
+- Record index snapshots, occurrences, URLs/final URLs, status/content type/bytes/SHA-256, titles, release dates, endpoint support, context/output limits, reasoning options, deprecations, and unavailable rows.
+- Compare against the prior local OpenAI corpus/manifests and clearly list newly documented model IDs. Do not re-submit byte-identical content merely because paths moved.
+- Recompute exact prepared hashes immediately before submission, atomically claim in the durable caller/bank ledger, and submit only new hashes.
+- Use the supplied broker helper for Liv bank preflight, retain, and immediate operation status. Submit one `.md` per invocation. Persist every accepted operation ID immediately.
+- Success requires each accepted operation to return HTTP 200 with status pending, processing, or completed. Do not wait for terminal ingestion and set recall deferred because queue acceptance is the stop condition.
+
+Required artifacts: index-validation.json, acquisition-manifest.json, prepared-manifest.json, prior-corpus-comparison.json, model-inventory.json, dedupe-decisions.json, submission-audit.jsonl, operation-status.json, result.json, final-result.json, summary.md. Include exact source/prepared/unique/alias/skipped/submitted/accepted/pending/processing/completed/failed/cancelled/unavailable counts and operation IDs.
+
+Safety: documentation and read-only model discovery plus authorized Liv retain only. Do not change LiteLLM, Hermes, profiles, provider configuration, aliases, keys, models, services, or containers. Do not launch/delegate another agent. Do not inspect/manage parent processes or PIDs; no process/ps/kill.
+
+Stop successfully when the complete declared first-party boundary is collected and evidenced, all newly prepared unique hashes are accepted into Liv, and every operation ID is live in pending/processing/completed. Stop blocked for any ambiguous model ID, missing authoritative enumeration, uncertain submission, or concrete source failure.

@@ -1,0 +1,7 @@
+{
+  "image_id": "sha256:8fc8ccb2760ef75a8a09815c2a7c24c6d7de60a5615d0c28aee1c0d02137b30e",
+  "size_bytes": 28647352,
+  "file_count": 2215,
+  "inputs_lock_sha256": "6fa3994e7bea04ae8047d864164d90d3087395fb1abff806b6c0040e01a28a2e",
+  "dockerfile_sha256": "c0c7b54614f975e2683c35e2a5627009798679066392ddbaa3de354196be49cf"
+}

@@ -1,0 +1,26 @@
+Run ID: broadcom-package-source-20260906
+Caller profile: default
+Caller agent: Liv
+Workspace: /home/jsondarula/Liv-Home
+Corpus root: /home/jsondarula/Liv-Home/Doc Corpus
+Hindsight bank: Liv
+
+Purpose: acquire and prepare only the exact package-source/local-evidence slice for Ubuntu Noble `broadcom-sta` 6.30.223.271-23ubuntu1. Do not submit to Hindsight in this phase.
+
+Boundary:
+1. Download the exact Ubuntu archive/Launchpad source artifacts for version 6.30.223.271-23ubuntu1: `.dsc`, original source tarball, Debian/Ubuntu packaging tarball, and source publication metadata. Verify checksums from the `.dsc`/publication metadata.
+2. Extract without changing host package state. Preserve every file under `debian/`, especially changelog, control, copyright, rules, dkms configuration, and every downstream patch plus patch series. Include all package-source files needed to establish BCM4360/PCI support and kernel compatibility patches; record excluded upstream driver binaries/object/build outputs.
+3. Copy/decompress all text documentation from `/usr/share/doc/broadcom-sta-dkms/` and all text source metadata/config/patch files from `/usr/src/broadcom-sta-6.30.223.271/`. Record dpkg package/version provenance. Exclude generated DKMS builds and binary/object files.
+4. Check and record relevant official Ubuntu archive/Launchpad `llms.txt` and `llms-full.txt` outcomes without treating aggregate prose as an index.
+
+Placement:
+- Source bytes: `sources/first-party/broadcom-wl-ubuntu-noble/package/`
+- Prepared UTF-8 Markdown: `prepared/broadcom-wl-ubuntu-noble/package/`
+- Phase evidence: `reports/runs/broadcom-package-source-20260906/`
+- Write final machine result to the launcher-required `result.json` and a `summary.md`.
+
+Evidence requirements: exact enumerated/source/prepared/unavailable/excluded counts; one manifest row per source occurrence; final URLs; content type; byte size; SHA-256; archive checksums; extraction mapping; source package version; all downstream patch names; parity assertion. Workspace-relative paths in new manifests.
+
+Safety: acquisition/preparation only. No Hindsight POST. No package install/update/hold change, DKMS build, module action, networking change, GRUB/Secure Boot change, service restart, or reboot. Do not launch/delegate another agent. Do not inspect/manage parent processes or use process/ps/kill.
+
+Stop successfully when this exact package/local-evidence boundary is fully acquired, prepared, and manifest-parity verified. Stop blocked only for a concrete unavailable source or integrity mismatch and record it.

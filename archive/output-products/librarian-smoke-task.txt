@@ -1,0 +1,1 @@
+Smoke test only. Do not search the web, modify files, call Hindsight, or launch any subprocess. Verify that you are running as the Librarian profile, report your current working directory, and explain the expected result-file path convention. Return a concise JSON object in your final response with keys: profile, cwd, writes_performed, hindsight_calls, result_path_convention.

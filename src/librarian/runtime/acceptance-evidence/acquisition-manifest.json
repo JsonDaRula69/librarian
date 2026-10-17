@@ -1,0 +1,28 @@
+{
+  "occurrences": [
+    {
+      "id": "docs:Documentation/index.md",
+      "status": "collected",
+      "enumerator_ids": [
+        "docs"
+      ],
+      "source_path": "sources/controller/docs/files/Documentation/index.md",
+      "sha256": "be455bec819c72df144bce9e363ed60a1a1b3e32baed0bcceaa26e9eceea0850",
+      "path": "Documentation/index.md",
+      "blob": "6b52bf49fa7112aac763fed15fd845aa05b61978",
+      "repository_ref": "/tmp/librarian-e2e-55z2gc3k/source-fixture@3d7ff7a896f572d4e283417ded1705e4d50030b7:Documentation/index.md"
+    },
+    {
+      "id": "docs:Documentation/schema.json",
+      "status": "collected",
+      "enumerator_ids": [
+        "docs"
+      ],
+      "source_path": "sources/controller/docs/files/Documentation/schema.json",
+      "sha256": "f1dfb1a78e355dd47d71b0708254594157d9d72704433f3ddce77f37d0748308",
+      "path": "Documentation/schema.json",
+      "blob": "1ae58918ee3825bba2d39f445fc1d04c5b4f812f",
+      "repository_ref": "/tmp/librarian-e2e-55z2gc3k/source-fixture@3d7ff7a896f572d4e283417ded1705e4d50030b7:Documentation/schema.json"
+    }
+  ]
+}

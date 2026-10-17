@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "rows": [
+    {
+      "surface": "docs",
+      "status": "covered",
+      "occurrence_ids": [
+        "docs:Documentation/index.md",
+        "docs:Documentation/schema.json"
+      ]
+    }
+  ]
+}
